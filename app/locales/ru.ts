@@ -1,7 +1,7 @@
 import { SubmitKey } from "../store/config";
-import type { LocaleType } from "./index";
+import type { PartialLocaleType } from "./index";
 
-const ru: LocaleType = {
+const ru: PartialLocaleType = {
   WIP: "Скоро...",
   Error: {
     Unauthorized:
@@ -61,74 +61,59 @@ const ru: LocaleType = {
   Settings: {
     Title: "Настройки",
     SubTitle: "Все настройки",
-    Actions: {
-      ClearAll: "Очистить все данные",
-      ResetAll: "Сбросить все настройки",
-      Close: "Закрыть",
-      ConfirmResetAll: "Вы уверены, что хотите сбросить все настройки?",
-      ConfirmClearAll: "Вы уверены, что хотите очистить все данные?",
-    },
+
     Lang: {
       Name: "Language", // ATTENTION: if you wanna add a new translation, please do not translate this value, leave it as `Language`
       All: "Все языки",
-      Options: {
-        cn: "简体中文",
-        en: "English",
-        tw: "繁體中文",
-        es: "Español",
-        it: "Italiano",
-        tr: "Türkçe",
-        jp: "日本語",
-        de: "Deutsch",
-        vi: "Vietnamese",
-        ru: "Русский",
-      },
     },
-      Avatar: "Аватар",
-      FontSize: {
-        Title: "Размер шрифта",
-        SubTitle: "Настроить размер шрифта контента чата",
-      },
-      Update: {
-        Version: (x: string) => `Версия: ${x}`,
-        IsLatest: "Последняя версия",
-        CheckUpdate: "Проверить обновление",
-        IsChecking: "Проверка обновления...",
-        FoundUpdate: (x: string) => `Найдена новая версия: ${x}`,
-        GoToUpdate: "Обновить",
-      },
-      SendKey: "Клавиша отправки",
-      Theme: "Тема",
-      TightBorder: "Узкая граница",
-      SendPreviewBubble: {
-        Title: "Отправить предпросмотр",
-        SubTitle: "Предварительный просмотр markdown в пузыре",
-      },
-      Mask: {
+    Avatar: "Аватар",
+    FontSize: {
+      Title: "Размер шрифта",
+      SubTitle: "Настроить размер шрифта контента чата",
+    },
+    Update: {
+      Version: (x: string) => `Версия: ${x}`,
+      IsLatest: "Последняя версия",
+      CheckUpdate: "Проверить обновление",
+      IsChecking: "Проверка обновления...",
+      FoundUpdate: (x: string) => `Найдена новая версия: ${x}`,
+      GoToUpdate: "Обновить",
+    },
+    SendKey: "Клавиша отправки",
+    Theme: "Тема",
+    TightBorder: "Узкая граница",
+    SendPreviewBubble: {
+      Title: "Отправить предпросмотр",
+      SubTitle: "Предварительный просмотр markdown в пузыре",
+    },
+    Mask: {
+      Splash: {
         Title: "Экран заставки маски",
         SubTitle: "Показывать экран заставки маски перед началом нового чата",
       },
-      Prompt: {
-        Disable: {
-          Title: "Отключить автозаполнение",
-          SubTitle: "Ввод / для запуска автозаполнения",
-        },
-        List: "Список подсказок",
-        ListCount: (builtin: number, custom: number) =>
-          `${builtin} встроенных, ${custom} пользовательских`,
-        Edit: "Редактировать",
-        Modal: {
-          Title: "Список подсказок",
-          Add: "Добавить",
-          Search: "Поиск подсказок",
-        },
-        EditModal: {
-          Title: "Редактировать подсказку",
-        },
+    },
+    Prompt: {
+      Disable: {
+        Title: "Отключить автозаполнение",
+        SubTitle: "Ввод / для запуска автозаполнения",
       },
-      HistoryCount: {
-        Title: "Количество прикрепляемых сообщений",
-        SubTitle: "Количество отправляемых сообщений, прикрепляемых к каждому запросу",
+      List: "Список подсказок",
+      ListCount: (builtin: number, custom: number) =>
+        `${builtin} встроенных, ${custom} пользовательских`,
+      Edit: "Редактировать",
+      Modal: {
+        Title: "Список подсказок",
+        Add: "Добавить",
+        Search: "Поиск подсказок",
+      },
+      EditModal: {
+        Title: "Редактировать подсказку",
+      },
+    },
+    HistoryCount: {
+      Title: "Количество прикрепляемых сообщений",
+      SubTitle:
+        "Количество отправляемых сообщений, прикрепляемых к каждому запросу",
     },
     CompressThreshold: {
       Title: "Порог сжатия истории",
@@ -163,10 +148,15 @@ const ru: LocaleType = {
       Title: "Максимальное количество токенов",
       SubTitle: "Максимальная длина вводных и генерируемых токенов",
     },
-    PresencePenlty: {
+    PresencePenalty: {
       Title: "Штраф за повторения",
       SubTitle:
         "Чем выше значение, тем больше вероятность общения на новые темы",
+    },
+    FrequencyPenalty: {
+      Title: "Штраф за частоту",
+      SubTitle:
+        "Большее значение снижает вероятность повторения одной и той же строки",
     },
   },
   Store: {
@@ -185,7 +175,8 @@ const ru: LocaleType = {
   },
   Copy: {
     Success: "Скопировано в буфер обмена",
-    Failed: "Не удалось скопировать, пожалуйста, предоставьте разрешение на доступ к буферу обмена",
+    Failed:
+      "Не удалось скопировать, пожалуйста, предоставьте разрешение на доступ к буферу обмена",
   },
   Context: {
     Toast: (x: any) => `С ${x} контекстными подсказками`,
@@ -213,7 +204,9 @@ const ru: LocaleType = {
     },
     EditModal: {
       Title: (readonly: boolean) =>
-        `Редактирование шаблона подсказки ${readonly ? "(только для чтения)" : ""}`,
+        `Редактирование шаблона подсказки ${
+          readonly ? "(только для чтения)" : ""
+        }`,
       Download: "Скачать",
       Clone: "Клонировать",
     },
@@ -229,7 +222,8 @@ const ru: LocaleType = {
     SubTitle: "Общайтесь с душой за маской",
     More: "Найти еще",
     NotShow: "Не показывать снова",
-    ConfirmNoShow: "Подтвердите отключение? Вы можете включить это позже в настройках.",
+    ConfirmNoShow:
+      "Подтвердите отключение? Вы можете включить это позже в настройках.",
   },
 
   UI: {
@@ -238,6 +232,12 @@ const ru: LocaleType = {
     Close: "Закрыть",
     Create: "Создать",
     Edit: "Редактировать",
+  },
+  Exporter: {
+    Model: "Модель",
+    Messages: "Сообщения",
+    Topic: "Тема",
+    Time: "Время",
   },
 };
 
