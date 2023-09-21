@@ -1,12 +1,16 @@
+import { getClientConfig } from "../config/client";
 import { SubmitKey } from "../store/config";
 import { LocaleType } from "./index";
 
 // if you are adding a new translation, please use PartialLocaleType instead of LocaleType
+
+const isApp = !!getClientConfig()?.isApp;
 const en: LocaleType = {
   WIP: "Coming Soon...",
   Error: {
-    Unauthorized:
-      "Unauthorized access, please enter access code in [auth](/#/auth) page.",
+    Unauthorized: isApp
+      ? "Invalid API Key, please check it in [Settings](/#/settings) page."
+      : "Unauthorized access, please enter access code in [auth](/#/auth) page, or enter your OpenAI API Key.",
   },
   Auth: {
     Title: "Need Access Code",
@@ -20,6 +24,13 @@ const en: LocaleType = {
   },
   Chat: {
     SubTitle: (count: number) => `${count} messages`,
+    EditMessage: {
+      Title: "Edit All Messages",
+      Topic: {
+        Title: "Topic",
+        SubTitle: "Change the current topic",
+      },
+    },
     Actions: {
       ChatList: "Go To Chat List",
       CompressedHistory: "Compressed History Memory Prompt",
@@ -28,7 +39,7 @@ const en: LocaleType = {
       Stop: "Stop",
       Retry: "Retry",
       Pin: "Pin",
-      PinToastContent: "Pinned 2 messages to contextual prompts",
+      PinToastContent: "Pinned 1 messages to contextual prompts",
       PinToastAction: "View",
       Delete: "Delete",
       Edit: "Edit",
@@ -68,6 +79,7 @@ const en: LocaleType = {
       Reset: "Reset to Default",
       SaveAs: "Save as Mask",
     },
+    IsContext: "Contextual Prompt",
   },
   Export: {
     Title: "Export Messages",
@@ -140,7 +152,10 @@ const en: LocaleType = {
       Title: "Font Size",
       SubTitle: "Adjust font size of chat content",
     },
-
+    InjectSystemPrompts: {
+      Title: "Inject System Prompts",
+      SubTitle: "Inject a global system prompt for every request",
+    },
     InputTemplate: {
       Title: "Input Template",
       SubTitle: "Newest message will be filled to this template",
@@ -160,6 +175,54 @@ const en: LocaleType = {
     SendPreviewBubble: {
       Title: "Send Preview Bubble",
       SubTitle: "Preview markdown in bubble",
+    },
+    AutoGenerateTitle: {
+      Title: "Auto Generate Title",
+      SubTitle: "Generate a suitable title based on the conversation content",
+    },
+    Sync: {
+      CloudState: "Last Update",
+      NotSyncYet: "Not sync yet",
+      Success: "Sync Success",
+      Fail: "Sync Fail",
+
+      Config: {
+        Modal: {
+          Title: "Config Sync",
+          Check: "Check Connection",
+        },
+        SyncType: {
+          Title: "Sync Type",
+          SubTitle: "Choose your favorite sync service",
+        },
+        Proxy: {
+          Title: "Enable CORS Proxy",
+          SubTitle: "Enable a proxy to avoid cross-origin restrictions",
+        },
+        ProxyUrl: {
+          Title: "Proxy Endpoint",
+          SubTitle:
+            "Only applicable to the built-in CORS proxy for this project",
+        },
+
+        WebDav: {
+          Endpoint: "WebDAV Endpoint",
+          UserName: "User Name",
+          Password: "Password",
+        },
+
+        UpStash: {
+          Endpoint: "UpStash Redis REST Url",
+          UserName: "Backup Name",
+          Password: "UpStash Redis REST Token",
+        },
+      },
+
+      LocalState: "Local Data",
+      Overview: (overview: any) => {
+        return `${overview.chat} chats，${overview.message} messages，${overview.prompt} prompts，${overview.mask} masks`;
+      },
+      ImportFailed: "Failed to import from file",
     },
     Mask: {
       Splash: {
@@ -221,6 +284,10 @@ const en: LocaleType = {
       Title: "Endpoint",
       SubTitle: "Custom endpoint must start with http(s)://",
     },
+    CustomModel: {
+      Title: "Custom Models",
+      SubTitle: "Add extra model options, separate by comma",
+    },
     Model: "Model",
     Temperature: {
       Title: "Temperature",
@@ -271,6 +338,9 @@ const en: LocaleType = {
   },
   Plugin: {
     Name: "Plugin",
+  },
+  FineTuned: {
+    Sysmessage: "You are an assistant that",
   },
   Mask: {
     Name: "Mask",
@@ -329,12 +399,21 @@ const en: LocaleType = {
     Close: "Close",
     Create: "Create",
     Edit: "Edit",
+    Export: "Export",
+    Import: "Import",
+    Sync: "Sync",
+    Config: "Config",
   },
   Exporter: {
     Model: "Model",
     Messages: "Messages",
     Topic: "Topic",
     Time: "Time",
+  },
+
+  URLCommand: {
+    Code: "Detected access code from url, confirm to apply? ",
+    Settings: "Detected settings from url, confirm to apply?",
   },
 };
 

@@ -7,7 +7,9 @@ export const RELEASE_URL = `${REPO_URL}/releases`;
 export const FETCH_COMMIT_URL = `https://api.github.com/repos/${OWNER}/${REPO}/commits?per_page=1`;
 export const FETCH_TAG_URL = `https://api.github.com/repos/${OWNER}/${REPO}/tags?per_page=1`;
 export const RUNTIME_CONFIG_DOM = "danger-runtime-config";
-export const DEFAULT_API_HOST = "https://chatgpt1.nextweb.fun/api/proxy";
+
+export const DEFAULT_CORS_HOST = "https://nb.nextweb.fun";
+export const DEFAULT_API_HOST = `${DEFAULT_CORS_HOST}/api/proxy`;
 
 export enum Path {
   Home = "/",
@@ -16,6 +18,10 @@ export enum Path {
   NewChat = "/new-chat",
   Masks = "/masks",
   Auth = "/auth",
+}
+
+export enum ApiPath {
+  Cors = "/api/cors",
 }
 
 export enum SlotID {
@@ -37,13 +43,17 @@ export enum StoreKey {
   Sync = "sync",
 }
 
+export const DEFAULT_SIDEBAR_WIDTH = 300;
 export const MAX_SIDEBAR_WIDTH = 500;
 export const MIN_SIDEBAR_WIDTH = 230;
 export const NARROW_SIDEBAR_WIDTH = 100;
 
-export const ACCESS_CODE_PREFIX = "ak-";
+export const ACCESS_CODE_PREFIX = "nk-";
 
 export const LAST_INPUT_KEY = "last-input";
+export const UNFINISHED_INPUT = (id: string) => "unfinished-input-" + id;
+
+export const STORAGE_KEY = "chatgpt-next-web";
 
 export const REQUEST_TIMEOUT_MS = 60000;
 
@@ -62,6 +72,8 @@ You are ChatGPT, a large language model trained by OpenAI.
 Knowledge cutoff: 2021-09
 Current model: {{model}}
 Current time: {{time}}`;
+
+export const SUMMARIZE_MODEL = "gpt-3.5-turbo";
 
 export const DEFAULT_MODELS = [
   {
@@ -108,24 +120,7 @@ export const DEFAULT_MODELS = [
     name: "gpt-3.5-turbo-16k-0613",
     available: true,
   },
-  {
-    name: "qwen-v1", // 通义千问
-    available: false,
-  },
-  {
-    name: "ernie", // 文心一言
-    available: false,
-  },
-  {
-    name: "spark", // 讯飞星火
-    available: false,
-  },
-  {
-    name: "llama", // llama
-    available: false,
-  },
-  {
-    name: "chatglm", // chatglm-6b
-    available: false,
-  },
 ] as const;
+
+export const CHAT_PAGE_SIZE = 15;
+export const MAX_RENDER_MSG_COUNT = 45;
